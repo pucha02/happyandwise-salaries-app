@@ -1,0 +1,1 @@
+# happyandwise-salaries-app
