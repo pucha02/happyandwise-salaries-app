@@ -1,0 +1,86 @@
+.salary-calculator-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.button {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calculate-btn {
+    background-color: #28a745;
+}
+
+.calculate-btn:hover {
+    background-color: #218838;
+}
+
+.refresh-btn {
+    background-color: #007bff;
+}
+
+.refresh-btn:hover {
+    background-color: #0056b3;
+}
+
+.salary-result {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.refresh-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-top: 10px;
+}
