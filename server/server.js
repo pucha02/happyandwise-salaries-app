@@ -19,7 +19,7 @@ app.use('/api/managers', managersRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/salaries', salariesRoutes)
 
-const keycrmBaseUrl = "https://openapi.keycrm.app/v1/order?limit=50&include=expenses%2Cmanager";
+const keycrmBaseUrl = "https://openapi.keycrm.app/v1/order?limit=50&include=expenses%2Cmanager%2Cproducts.offer";
 const keyCrmToken = "MWJlODYwNDRmMzc2ZTA0MWEwNTE5ODFkNzIwMDU5MWNjMDU0MjM2YQ";
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -57,6 +57,7 @@ app.get('/api/fetch-orders', async (req, res) => {
 
             const orders = data.data.map(order => ({
                 orderId: order.id,
+                products: order.products,
                 expenses: order.expenses,
                 manager: order.manager || null,
                 created_at: order.created_at,
