@@ -1,20 +1,20 @@
 import React from "react";
 import "./RegistryTable.css";
 
-const RegistryTable = ({ isOpen, onClose, data }) => {
+const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
     if (!isOpen) return null;
 
     // Сортируем данные по дате (от меньшей к большей)
     const sortedData = [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
     const getStatusClass = (status) => {
-        if (status === 'paid') return 'status-paid'; 
-        if (status === 'canceled') return 'status-canceled'; 
-        return ''; 
+        if (status === 'paid') return 'status-paid';
+        if (status === 'canceled') return 'status-canceled';
+        return '';
     };
 
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content">
                 <button className="modal-close" onClick={onClose}>
                     ✖
@@ -27,7 +27,7 @@ const RegistryTable = ({ isOpen, onClose, data }) => {
                             <th>Послуга</th>
                             <th>Дата внесення витрати</th>
                             <th>Коментар</th>
-                            <th>Сума</th>
+                            <th style={{ width: "80px" }}>Сума</th>
                             <th>Статус</th>
                         </tr>
                     </thead>
@@ -42,10 +42,15 @@ const RegistryTable = ({ isOpen, onClose, data }) => {
                                 <td className={getStatusClass(row.status)}>{row.status}</td>
                             </tr>
                         ))}
+                        <tr>
+                            <td colSpan={5} style={{ textAlign: "right" }}>Загальна зарплата:</td>
+                            <td>{totalSalary} грн</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
     );
 };
 

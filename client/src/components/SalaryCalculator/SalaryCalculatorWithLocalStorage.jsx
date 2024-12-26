@@ -55,19 +55,18 @@ function SalaryCalculatorWithLocalStorage() {
         const endDates = endOfDay(new Date(endDate));
         const paymentTable = [];
         const paymentTableModal = [];
-
+    
         if (!managerId) {
-            // Расчет зарплаты для всех менеджеров
             const managerSalaries = {};
             orders.forEach(order => {
                 if (!order.manager || !order.manager.id) return;
-
+    
                 const managerId = parseInt(order.manager.id, 10);
                 const filteredExpenses = order.expenses.filter(expense => {
                     const expenseDate = new Date(expense.created_at);
                     return expenseDate >= start && expenseDate <= endDates && expense.status !== 'canceled';
                 });
-
+    
                 filteredExpenses.forEach(expense => {
                     paymentTable.push({
                         managerName: order.manager.full_name || `Менеджер ${managerId}`,
@@ -76,31 +75,30 @@ function SalaryCalculatorWithLocalStorage() {
                         amount: expense.amount,
                     });
                 });
-
+    
                 const filteredExpensesSum = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
-
+    
                 if (!managerSalaries[managerId]) {
                     managerSalaries[managerId] = 0;
                 }
                 managerSalaries[managerId] += filteredExpensesSum;
             });
-
+    
             return { salaries: managerSalaries, table: paymentTable };
         }
-
-        // Расчет зарплаты для конкретного менеджера
+    
         const managerIdNumber = parseInt(managerId, 10);
         const filteredOrders = orders.filter(order => {
             if (!order.manager || parseInt(order.manager.id, 10) !== managerIdNumber) {
                 return false;
             }
-
+    
             return order.expenses.some(expense => {
                 const expenseDate = new Date(expense.created_at);
                 return expenseDate >= start && expenseDate <= endDates && expense.status !== 'canceled';
             });
         });
-
+    
         filteredOrders.forEach(order => {
             order.expenses.forEach(expense => {
                 const expenseDate = new Date(expense.created_at);
@@ -113,12 +111,12 @@ function SalaryCalculatorWithLocalStorage() {
                         status: expense.status,
                     });
                 }
-                // Добавляем информацию о продуктах в модальное окно
-                if (expenseDate >= start && expenseDate <= endDates ) {
+    
+                if (expenseDate >= start && expenseDate <= endDates) {
                     order.products.forEach(product => {
                         paymentTableModal.push({
                             managerName: order.manager.full_name,
-                            productName: product.name, // Добавляем имя продукта
+                            productName: product.name,
                             description: expense.description,
                             createdAt: expense.created_at,
                             amount: expense.amount,
@@ -126,15 +124,14 @@ function SalaryCalculatorWithLocalStorage() {
                         });
                     });
                 }
-
-
             });
         });
-
+    
         const totalSalary = paymentTable.reduce((total, row) => total + row.amount, 0);
-
+    
         return { salary: totalSalary, table: paymentTableModal };
     };
+    
 
 
 
@@ -267,7 +264,9 @@ function SalaryCalculatorWithLocalStorage() {
             </div>
 
             {message && <p className="message">{message}</p>}
-            <RegistryTable isOpen={isModalOpen} onClose={handleCloseModal} data={modalData} />
+            <RegistryTable isOpen={isModalOpen} onClose={handleCloseModal} data={modalData} totalSalary={modalData
+        .filter(item => item.status !== 'canceled') // Исключаем статус "canceled"
+        .reduce((total, item) => total + item.amount, 0)}/>
         </div>
 
 
