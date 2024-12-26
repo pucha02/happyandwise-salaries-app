@@ -11,6 +11,7 @@ function SalaryCalculatorWithLocalStorage() {
     const [managers, setManagers] = useState([]);
     const [selectedManager, setSelectedManager] = useState('');
     const [salary, setSalary] = useState(null);
+    const [allSalaries, setAllSalaries] = useState([]);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
 
@@ -23,7 +24,7 @@ function SalaryCalculatorWithLocalStorage() {
             localStorage.setItem('orders', JSON.stringify(response.data)); // Сохраняем данные в localStorage
             setMessage('Дані успішно оновлені');
         } catch (error) {
-            console.error('Ошибка при получении данных:', error);
+            console.error('Ошибка при отриманні даних:', error);
             setMessage('Помилка під час оновлення даних.');
         } finally {
             setLoading(false);
@@ -43,7 +44,6 @@ function SalaryCalculatorWithLocalStorage() {
             return [];
         }
     };
-
 
     const calculateSalary = (managerId, startDate, endDate) => {
         const orders = getOrdersFromLocalStorage();
@@ -112,9 +112,7 @@ function SalaryCalculatorWithLocalStorage() {
             return total + filteredExpensesSum;
         }, 0);
     };
-    
-    
-    
+
     const handleCalculate = () => {
         const orders = getOrdersFromLocalStorage();
     
@@ -124,25 +122,22 @@ function SalaryCalculatorWithLocalStorage() {
         }
     
         if (!selectedManager) {
-            // Если менеджер не выбран, вычисляем зарплату для всех менеджеров
             const managerSalaries = calculateSalary(null, startDate, endDate);
-            const allSalaries = Object.entries(managerSalaries).map(([id, salary]) => {
+            const salariesList = Object.entries(managerSalaries).map(([id, salary]) => {
                 const manager = managers.find(m => parseInt(m.id, 10) === parseInt(id, 10));
-                return `${manager.full_name}: ${salary}`;
+                return { id, name: manager?.full_name || `Менеджер ${id}`, salary };
             });
-            setMessage(`Зарплати всіх менеджерів:\n${allSalaries.join('\n')}`);
+            setAllSalaries(salariesList); // Заполняем список зарплат
+            setSalary(null); // Сбрасываем индивидуальную зарплату
         } else {
-            // Вычисляем зарплату для конкретного менеджера
             const totalSalary = calculateSalary(selectedManager, startDate, endDate);
-            setSalary(totalSalary);
-            setMessage('');
+            setSalary(totalSalary); // Устанавливаем зарплату выбранного менеджера
+            setAllSalaries([]); // Очищаем список зарплат
         }
     };
     
-    
-    
-    
-const handleRefresh = async () => {
+
+    const handleRefresh = async () => {
         setLoading(true);
         setMessage('');
 
@@ -210,17 +205,37 @@ const handleRefresh = async () => {
         </select>
     </div>
     <button onClick={handleCalculate} className="button calculate-btn">Calculate</button>
-    {salary !== null && (
-        <p className="salary-result">Зарплата менеджера: {salary}</p>
+
+    {/* Вывод зарплаты для одного менеджера */}
+    {salary !== null && selectedManager && (
+        <div className="salary-result">
+            <p>Зарплата менеджера: {salary}</p>
+        </div>
     )}
+
+    {/* Вывод зарплаты для всех менеджеров */}
+    {allSalaries.length > 0 && (
+        <div className="salary-list">
+            <h3>Зарплати всіх менеджерів:</h3>
+            {allSalaries.map(({ id, name, salary }) => (
+                <div key={id} className="salary-list-item">
+                    {name}: {salary}
+                </div>
+            ))}
+        </div>
+    )}
+
     <div className="refresh-container">
         <button onClick={handleRefresh} disabled={loading} className="button refresh-btn">
             {loading ? 'Оновлення...' : 'Оновити дані'}
         </button>
-        {message && <p className="message">{message}</p>}
     </div>
+
+    {/* Сообщение об ошибке или обновлении */}
+    {message && <p className="message">{message}</p>}
 </div>
 
+    
     );
 }
 
