@@ -23,7 +23,7 @@ function SalaryCalculatorWithLocalStorage() {
         setMessage('');
 
         try {
-            const response = await axios.get('http://localhost:5000/api/fetch-orders');
+            const response = await axios.get('http://13.60.182.76/api/fetch-orders');
             localStorage.setItem('orders', JSON.stringify(response.data)); // Сохраняем данные в localStorage
             setMessage('Дані успішно оновлені');
         } catch (error) {
@@ -265,7 +265,7 @@ function SalaryCalculatorWithLocalStorage() {
 
             {message && <p className="message">{message}</p>}
             <RegistryTable isOpen={isModalOpen} onClose={handleCloseModal} data={modalData} totalSalary={modalData
-        .filter(item => item.status !== 'canceled') // Исключаем статус "canceled"
+        .filter(item => item.status !== 'canceled')
         .reduce((total, item) => total + item.amount, 0)}/>
         </div>
 
