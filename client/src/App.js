@@ -1,6 +1,6 @@
 import './App.css';
 
-import SalaryCalculatorWithLocalStorage from './components/SalaryCalculatorWithLocalStorage';
+import SalaryCalculatorWithLocalStorage from './components/SalaryCalculator/SalaryCalculatorWithLocalStorage';
 
 function App() {
   return (
