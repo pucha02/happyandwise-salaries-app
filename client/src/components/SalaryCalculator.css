@@ -67,12 +67,42 @@
 }
 
 .salary-result {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
     color: #333;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
     text-align: center;
-    margin-top: 20px;
 }
+
+.salary-list {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.salary-list-item {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+    padding: 5px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.salary-list-item:last-child {
+    border-bottom: none;
+}
+
+.message {
+    font-size: 14px;
+    color: #f00;
+    margin-top: 10px;
+}
+
 
 .refresh-container {
     text-align: center;
@@ -83,4 +113,31 @@
     color: #ff6b6b;
     font-size: 14px;
     margin-top: 10px;
+}
+
+.salaries-list {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.salary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.salary-item:last-child {
+    border-bottom: none;
+}
+
+.manager-name {
+    font-weight: bold;
+}
+
+.manager-salary {
+    color: #2c3e50;
 }
