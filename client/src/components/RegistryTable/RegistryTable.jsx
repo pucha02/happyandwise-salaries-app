@@ -1,7 +1,7 @@
 import React from "react";
 import "./RegistryTable.css";
 
-const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
+const RegistryTable = ({ isOpen, onClose, data, totalSalary }) => {
     if (!isOpen) return null;
 
     // Сортируем данные по дате (от меньшей к большей)
@@ -15,7 +15,10 @@ const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
 
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content">
+            <div
+                className="modal-content"
+                onClick={(event) => event.stopPropagation()} // Останавливаем всплытие события
+            >
                 <button className="modal-close" onClick={onClose}>
                     ✖
                 </button>
@@ -25,6 +28,7 @@ const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
                         <tr>
                             <th>Ім'я менеджера</th>
                             <th>Послуга</th>
+                            <th>Ціна послуги</th>
                             <th>Дата внесення витрати</th>
                             <th>Коментар</th>
                             <th style={{ width: "80px" }}>Сума</th>
@@ -36,6 +40,7 @@ const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
                             <tr key={index}>
                                 <td>{row.managerName}</td>
                                 <td>{row.productName}</td>
+                                <td>{row.productPrice} грн</td>
                                 <td>{new Date(row.createdAt).toLocaleString()}</td>
                                 <td>{row.description}</td>
                                 <td>{row.amount} грн</td>
@@ -50,6 +55,7 @@ const RegistryTable = ({ isOpen, onClose, data, totalSalary  }) => {
                 </table>
             </div>
         </div>
+
 
     );
 };

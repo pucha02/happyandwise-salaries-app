@@ -24,7 +24,7 @@ function SalaryCalculatorWithLocalStorage() {
 
         try {
             const response = await axios.get('http://13.60.182.76/api/fetch-orders');
-            localStorage.setItem('orders', JSON.stringify(response.data)); // Сохраняем данные в localStorage
+            localStorage.setItem('orders', JSON.stringify(response.data));
             setMessage('Дані успішно оновлені');
         } catch (error) {
             console.error('Ошибка при отриманні даних:', error);
@@ -117,6 +117,7 @@ function SalaryCalculatorWithLocalStorage() {
                         paymentTableModal.push({
                             managerName: order.manager.full_name,
                             productName: product.name,
+                            productPrice: product.price,
                             description: expense.description,
                             createdAt: expense.created_at,
                             amount: expense.amount,
