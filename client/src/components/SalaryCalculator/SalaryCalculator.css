@@ -1,148 +1,404 @@
+body {
+  display: flex; /* Flexbox для центрирования */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  min-height: 100vh; /* Минимальная высота страницы */
+  margin: 0; /* Убираем отступы */
+}
+
+.main {
+  margin-top: 75px;
+}
+
+.logo {
+  margin-left: 30px;
+}
+
 .salary-calculator-container {
-    max-width: 600px;
-    height: 100vh;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 940px;
+  padding-bottom: 20px; /* Исходная ширина */
+  max-width: 100%; /* Ограничение по ширине (не больше экрана) */
+  height: max-content;
+  min-height: 600px; /* Фиксированная высота */
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease; /* Анимация изменения размера */
+}
+
+/* Когда экран становится меньше ширины блока */
+
+html {
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 30px;
-    color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-    margin-bottom: 20px;
+  width: max-content;
 }
 
 .label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-    display: block;
-    margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+option {
+  padding: 10px;
+  background-color: #fff;
+  color: #333;
 }
 
 .input-field {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 240px;
+  height: 51px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .input-field:focus {
-    border-color: #007bff;
-    outline: none;
+  border-color: #d9d9d9;
+  outline: none;
+}
+
+select option {
+  height: 48px;
+}
+
+.font-weight {
+  font-weight: 650;
+  font-size: 24px;
 }
 
 .button {
-    padding: 12px 20px;
-    font-size: 14px;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.button.register-btn{
-    background-color: #007bff;
+.button.register-btn {
+  background-color: #073b34;
+  opacity: 0.8;
+  width: 180px;
+  height: 48px;
+  font-size: 25px;
+  font-stretch: expanded;
+  padding: 0;
 }
 
 .calculate-btn {
-    background-color: #28a745;
+  background-color: #28a745;
 }
 
 .calculate-btn:hover {
-    background-color: #218838;
-}
-
-.refresh-btn {
-    background-color: #007bff;
-}
-
-.refresh-btn:hover {
-    background-color: #0056b3;
+  background-color: #218838;
 }
 
 .salary-result {
-    font-size: 18px;
-    color: #333;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  width: 475px;
+  margin: 0 auto 0 auto;
+}
+
+teacher-salary {
+  border-bottom: 1px dashed #ddd;
 }
 
 .salary-list {
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  text-align: center;
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 475px;
+  margin: 0 auto 0 auto;
 }
 
 .salary-list-item {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
-    padding: 5px 0;
-    border-bottom: 1px dashed #ddd;
+  font-size: 16px;
+  color: #000000;
+  margin: 5px 0;
+  padding: 5px 0;
+  border-bottom: 1px dashed #ddd;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .salary-list-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .message {
-    font-size: 14px;
-    color: #f00;
-    margin-top: 10px;
+  font-size: 14px;
+  color: #f00;
+  margin-top: 10px;
 }
 
+#manager {
+    width: 100%;
+}
+
+.refresh-btn {
+  background-color: #073b34;
+  padding: 0;
+  margin-left: 9px;
+  font-size: 21px;
+}
 
 .refresh-container {
-    text-align: center;
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #073b34;
+  width: max-content;
+  padding: 0px 15px;
+  height: 60px;
+  border-radius: 8px;
+  opacity: 0.8;
+  border: 1px solid #073b34;
+  width: 195px;
+  cursor: pointer;
+}
+
+#button-update-data{
+    display: none;
+}
+
+.refresh-container.first {
+  margin-right: 30px;
 }
 
 .message {
-    color: #ff6b6b;
-    font-size: 14px;
-    margin-top: 10px;
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .salaries-list {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .salary-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .salary-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .manager-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .manager-salary {
-    color: #2c3e50;
+  color: #2c3e50;
+}
+
+.form-group-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header-app {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.form-group-line.second {
+  margin-top: 74px;
+}
+
+.form-group-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+
+.calculate-btn {
+  margin-top: 90px;
+}
+
+.refresh-container.calculator {
+  margin: 0 auto;
+  margin-top: 90px;
+  cursor: pointer;
+}
+
+@media (max-width: 940px) {
+  .salary-calculator-container {
+    width: 600px;
+    max-width: 100%; /* Ограничение по ширине (не больше экрана) */
+    /* Уменьшаем ширину в процентах от экрана */
+  }
+  .input-field {
+    width: 170px;
+    margin-left: 0px;
+  }
+  select {
+    margin-left: 0px;
+  }
+}
+
+/* Если экран становится совсем узким */
+@media (max-width: 600px) {
+  .salary-calculator-container {
+    width: 100%;
+    height: 100vh;
+    margin: auto 0;
+  }
+  .form-group-line {
+    display: block;
+  }
+  .form-group-content{
+    display: block;
+    margin: 0 auto;
+  }
+  .form-group {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .salary-list{
+    width: 235px;
+    height: 275px;
+  }
+
+  #button-update-data{
+    display: flex;
+}
+
+  .refresh-container-mob {
+    display: flex;
+    justify-content: center;
+    margin: 15px auto 0 auto;
+    align-items: center;
+    background-color: #073b34;
+    width: 315px;
+    height: 38px;
+    border-radius: 8px;
+    opacity: 0.8;
+    border: 1px solid #073b34;
+    cursor: pointer;
+  }
+
+.refresh-container.first {
+    display: none;
+}
+
+.refresh-container.calculator {
+    width: 316px;
+    height: 38px;
+}
+
+.input-field.manager {
+    margin: 0 auto;
+}
+
+.header-app{
+    margin-right: 10%;
+    font-size: 18px;
+}
+
+.title {
+    height: 60px;
+    justify-content: space-around;
+}
+
+#manager {
+    padding: 0;
+    width: 240px;
+}
+
+.logo img{
+    height: 48px;
+}
+
+.button.register-btn {
+    width: 180px;
+    height: 36px;
+}
+
+  .font-weight{
+    margin-top: 60px;
+    margin-bottom: 16px;
+  }
+
+  .input-field {
+    margin-left: 12px;
+    width: 210px;
+    height: 32px;
+  }
+ 
+  .main {
+    margin: auto 0;
+  }
+  .salary-calculator-container {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: normal;
+  }
+}
+
+@media (max-height: 430px) and (max-width: 600px){
+  
+  .salary-calculator-container {
+    width: 100%;
+    height: 100%;
+    margin: auto 0;
+  }
+  .main {
+    margin: auto 0;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: normal;
+  }
 }
